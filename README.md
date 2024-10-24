@@ -2,10 +2,6 @@
 
 <div align="center">
 <img src="https://github.com/user-attachments/assets/4456a2ff-b579-4963-ab71-86436ee1712a">
-
-    레시피 연구소는 필요한 레시피의 정보를 얻고
-    나의 레시피도 공유할 수 있는 커뮤니티 사이트입니다.
-
 </div>
 
 ## 목차
