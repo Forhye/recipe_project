@@ -24,20 +24,20 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
 	};
 
 	return (
-		<div className={styles.recipeCard} onClick={handleNavigate}>
-			<div className={styles.thumbnailContainer}>
+		<article className={styles.recipeCard} onClick={handleNavigate}>
+			<figure className={styles.thumbnailContainer}>
 				<img
 					src={recipe.thumbnail_url}
 					alt={recipe.recipe_name}
 					className={styles.thumbnail}
 				/>
-				<div className={styles.levelBtnWrapper}>
+				<figcaption className={styles.levelBtnWrapper}>
 					{levelCircle(recipe.recipe_difficulty)}
-				</div>
-			</div>
+				</figcaption>
+			</figure>
 
-			<div className={styles.recipeInfo}>
-				<div className={styles.recipeInfoHeader}>
+			<section className={styles.recipeInfo}>
+				<header className={styles.recipeInfoHeader}>
 					<h3 className={styles.recipeTitle}>{recipe.recipe_name}</h3>
 					<div className={styles.viewsAndHearts}>
 						<div className={styles.recipeViews}>
@@ -50,13 +50,15 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
 							<span className={styles.heartText}>{recipe.hearts}</span>
 						</div>
 					</div>
-				</div>
-				<div className={styles.recipeDesc}>
+				</header>
+
+				<section className={styles.recipeDesc}>
 					<span className={styles.recipeDescText}>
 						{recipe.recipe_description}
 					</span>
-				</div>
-				<div className={styles.recipeIngredients}>
+				</section>
+
+				<footer className={styles.recipeIngredients}>
 					{recipe.recipe_ingredients.slice(0, 3).map((ingredient, index) => (
 						<Tag key={index} className={styles.ingredient}>
 							<span className={styles.ingredientText}>{ingredient.name}</span>
@@ -70,9 +72,9 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
 							</span>
 						</Tag>
 					)}
-				</div>
-			</div>
-		</div>
+				</footer>
+			</section>
+		</article>
 	);
 };
 

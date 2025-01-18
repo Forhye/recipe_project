@@ -56,7 +56,9 @@ const Login = () => {
 	}, []);
 
 	return (
-		<div className={styles.pageContainer}>
+		<section className={styles.pageContainer}>
+			<h1 className={styles.srOnly}>로그인 페이지</h1>
+
 			<div className={styles.loginContainer}>
 				<div className={styles.loginBox}>
 					<h1 className={styles.title}>
@@ -101,12 +103,12 @@ const Login = () => {
 						<Link to="/forgot-password">이메일 찾기</Link> <span>|</span>{' '}
 						<Link to="/forgot-password">비밀번호 찾기</Link>
 					</div>
-					<p className={styles.signup}>
+					<footer className={styles.signup}>
 						아직 회원이 아니신가요? <Link to="/signup">회원가입</Link>
-					</p>
+					</footer>
 				</div>
 			</div>
-		</div>
+		</section>
 	);
 };
 
