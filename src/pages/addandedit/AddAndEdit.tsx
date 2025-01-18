@@ -26,6 +26,63 @@ const AddAndEdit = () => {
 	const [views, setViews] = useState<number>(0);
 	const [hearts, setHearts] = useState<number>(0);
 	const { imageUrl, uploadImage, setImageUrl } = useThumbnailImgUpload();
+	const [steps, setSteps] = useState([{ description: '', image: '' }]);
+
+	// Step 이미지 업로드 훅 사용
+	const { uploadStepImage, uploadProgress } = useStepImgUpload();
+
+	// 레시피 Add 함수
+	// custom hook 사용
+	const { addRecipe, getRecipe, updateRecipe } = useAddRecipe();
+
+	const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(true);
+
+	// 난이도 드롭다운 항목
+	// 드롭다운 상태
+	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+	const [selectedDifficulty, setSelectedDifficulty] = useState<number | string>(
+		'레벨을 선택해주세요'
+	);
+
+	// 생성 및 수정
+	const { id } = useParams();
+
+	useEffect(() => {
+		const fetchRecipe = async () => {
+			if (id) {
+				const recipeData = await getRecipe(id);
+				if (recipeData) {
+					setRecipeName(recipeData.recipe_name);
+					setRecipeDesc(recipeData.recipe_description);
+					setCookingTimeHour(recipeData.recipe_time.hours.toString());
+					setCookingTimeMinute(recipeData.recipe_time.minutes.toString());
+					setIngredients(
+						recipeData.recipe_ingredients.map((ing) => ({
+							name: ing.name,
+							amount: ing.volume,
+						}))
+					);
+					setDifficulty(`Lv ${recipeData.recipe_difficulty}`);
+					setSelectedDifficulty(`Lv ${recipeData.recipe_difficulty}`);
+					setSteps(
+						recipeData.recipe_steps.map((step) => ({
+							description: step.step_description,
+							image: step.step_image_url,
+						}))
+					);
+					setRecipeTip(recipeData.recipe_tips);
+					setTags(recipeData.recipe_tags);
+					// Assuming you have a way to set the thumbnail image URL
+					setImageUrl(recipeData.thumbnail_url);
+					setViews(recipeData.views);
+					setHearts(recipeData.hearts);
+				}
+			}
+		};
+
+		fetchRecipe();
+		window.scrollTo(0, 0);
+	}, [id]);
 
 	const handleThumbnailImgChange = (
 		event: React.ChangeEvent<HTMLInputElement>
@@ -35,9 +92,6 @@ const AddAndEdit = () => {
 			uploadImage(file); // 이미지 업로드 함수 호출
 		}
 	};
-
-	const [steps, setSteps] = useState([{ description: '', image: '' }]);
-	const { uploadStepImage, uploadProgress } = useStepImgUpload(); // Step 이미지 업로드 훅 사용
 
 	// 레시피 단계 이미지 함수
 	const handleStepImgChange = async (
@@ -81,11 +135,6 @@ const AddAndEdit = () => {
 	const removeStep = (index: number) => {
 		setSteps(steps.filter((_, i) => i !== index));
 	};
-
-	// 레시피 Add 함수
-	const { addRecipe, getRecipe, updateRecipe } = useAddRecipe(); // custom hook 사용
-
-	const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(true);
 
 	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault(); // 기본 제출 방지
@@ -164,12 +213,6 @@ const AddAndEdit = () => {
 		}
 	};
 
-	// 난이도 드롭다운 항목
-	const [isDropdownOpen, setIsDropdownOpen] = useState(false); // 드롭다운 상태
-	const [selectedDifficulty, setSelectedDifficulty] = useState<number | string>(
-		'레벨을 선택해주세요'
-	);
-
 	const difficultyOptions = [
 		{ value: 1, label: 'Lv 1' },
 		{ value: 2, label: 'Lv 2' },
@@ -185,46 +228,6 @@ const AddAndEdit = () => {
 		setDifficulty(value); // 상태 업데이트
 		setIsDropdownOpen(false); // 드롭다운 닫기
 	};
-
-	// 생성 및 수정
-	const { id } = useParams();
-
-	useEffect(() => {
-		const fetchRecipe = async () => {
-			if (id) {
-				const recipeData = await getRecipe(id);
-				if (recipeData) {
-					setRecipeName(recipeData.recipe_name);
-					setRecipeDesc(recipeData.recipe_description);
-					setCookingTimeHour(recipeData.recipe_time.hours.toString());
-					setCookingTimeMinute(recipeData.recipe_time.minutes.toString());
-					setIngredients(
-						recipeData.recipe_ingredients.map((ing) => ({
-							name: ing.name,
-							amount: ing.volume,
-						}))
-					);
-					setDifficulty(`Lv ${recipeData.recipe_difficulty}`);
-					setSelectedDifficulty(`Lv ${recipeData.recipe_difficulty}`);
-					setSteps(
-						recipeData.recipe_steps.map((step) => ({
-							description: step.step_description,
-							image: step.step_image_url,
-						}))
-					);
-					setRecipeTip(recipeData.recipe_tips);
-					setTags(recipeData.recipe_tags);
-					// Assuming you have a way to set the thumbnail image URL
-					setImageUrl(recipeData.thumbnail_url);
-					setViews(recipeData.views);
-					setHearts(recipeData.hearts);
-				}
-			}
-		};
-
-		fetchRecipe();
-		window.scrollTo(0, 0);
-	}, [id]);
 
 	return (
 		<div className={styles.createAndEditSection}>
