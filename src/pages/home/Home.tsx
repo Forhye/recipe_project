@@ -75,8 +75,8 @@ const Home = () => {
 	return (
 		<>
 			<div id={styles.home}>
-				<article className={styles.homeBanner}>
-					<div className={styles.bannerText}>
+				<section className={styles.homeBanner}>
+					<header className={styles.bannerText}>
 						<p>가족과 함께한 행복했던 시간, 친구들과 나눈 즐거운 순간,</p>
 						<p>혹은 당신의 인생에 특별한 의미를 지닌 소중한 기억이 담긴.</p>
 						<p>
@@ -87,7 +87,7 @@ const Home = () => {
 							또는 힘들 때 위로가 되어준 comfort food까지, 당신의 마음을
 							따뜻하게 만드는 모든 요리의 레시피를 들려주세요.
 						</p>
-					</div>
+					</header>
 					<div className={styles.linkBtnWrapper}>
 						<CustomButton
 							btnType={ButtonType.Share}
@@ -106,24 +106,28 @@ const Home = () => {
 							전체 레시피 확인하기
 						</CustomButton>
 					</div>
-				</article>
-				<RecommendCard />
-				<PlusMenuBtn isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
-				{isOpen && (
-					<ul className={styles.plusMenu} ref={plusRef}>
-						{/* 각 옵션을 Link로 감싸 경로를 추가 */}
-						{options.map((option) => (
-							<li key={option.label}>
-								<span
-									className={styles.plusMenuList}
-									onClick={() => handleOptionClick(option.path)}
-								>
-									{option.label}
-								</span>
-							</li>
-						))}
-					</ul>
-				)}
+				</section>
+
+				<aside>
+					<RecommendCard />
+					<PlusMenuBtn isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+					{isOpen && (
+						<nav className={styles.plusMenu} ref={plusRef}>
+							<ul>
+								{options.map((option) => (
+									<li key={option.label}>
+										<span
+											className={styles.plusMenuList}
+											onClick={() => handleOptionClick(option.path)}
+										>
+											{option.label}
+										</span>
+									</li>
+								))}
+							</ul>
+						</nav>
+					)}
+				</aside>
 			</div>
 
 			<div className={styles.backgroundWrap} ref={recipeListRef}>
