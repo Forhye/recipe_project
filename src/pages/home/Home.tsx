@@ -26,7 +26,7 @@ const Home = () => {
 		const currentUrl = window.location.href;
 
 		if (currentUrl.includes('/')) {
-			document.body.style.marginTop = '100px';
+			document.body.style.marginTop = '50px';
 		}
 
 		document.addEventListener('mousedown', handleClickOutside);
