@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
 	return (
-		<div id={styles.footer}>
-			<div className={styles.footerSection}>
-				<div className={styles.footerLinks}>
+		<footer id={styles.footer}>
+			<section className={styles.footerSection}>
+				<nav className={styles.footerLinks}>
 					<ul className={styles.logoAndFooterMenu}>
 						<li className={styles.logoGrayImg}>
-							<img src={logoGrayImg} alt="회색 레시피 연구소" />
+							<img src={logoGrayImg} alt="회색 레시피 연구소 로고" />
 						</li>
 						<li className={styles.footerMenuText}>
 							<Link to="/login">로그인</Link>
@@ -27,7 +27,7 @@ const Footer = () => {
 					</ul>
 					<ul className={styles.githubLink}>
 						<li>
-							<img src={githubImg} alt="깃허브" />
+							<img src={githubImg} alt="깃허브 로고" />
 						</li>
 						<li>
 							<a href="https://github.com/Jung-sunghoon">정성훈</a>
@@ -42,12 +42,12 @@ const Footer = () => {
 							<a href="https://github.com/Hongaproject">홍성원</a>
 						</li>
 					</ul>
-				</div>
-				<div className={styles.footerCopyright}>
-					&copy; 2024.레시피 연구소 팀 All Rights Reserved.
-				</div>
-			</div>
-		</div>
+				</nav>
+				<p className={styles.footerCopyright}>
+					&copy; 2024. 레시피 연구소 팀 All Rights Reserved.
+				</p>
+			</section>
+		</footer>
 	);
 };
 
