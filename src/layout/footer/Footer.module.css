@@ -32,6 +32,21 @@
 	font-size: 18px;
 }
 
+.footerLoginMenu {
+	display: flex;
+	align-items: center;
+}
+
+.footerLogOutMenu {
+	opacity: 60%;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.footerLoginMenu :nth-child(2) {
+	padding-left: 40px;
+}
+
 .githubLink {
 	display: flex;
 	align-items: center;
