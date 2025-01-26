@@ -130,12 +130,15 @@ const ForgotPassword = () => {
 
 	return (
 		<div className={styles.container}>
-			<h2 className={styles.title}>
-				<Link to="/">
-					<img src="/assets/icon_logo.png" alt="홈으로 가기" />
-				</Link>
-			</h2>
-			<div className={styles.toggleContainer}>
+			<header>
+				<h2 className={styles.title}>
+					<Link to="/">
+						<img src="/assets/icon_logo.png" alt="홈으로 가기" />
+					</Link>
+				</h2>
+			</header>
+
+			<nav className={styles.toggleContainer}>
 				<button
 					className={`${styles.toggleButton} ${!isPasswordReset ? styles.active : ''}`}
 					onClick={() => {
@@ -154,50 +157,54 @@ const ForgotPassword = () => {
 				>
 					비밀번호 찾기
 				</button>
-			</div>
-			<form onSubmit={handleSubmit} className={styles.form}>
-				{!isPasswordReset ? (
-					<>
-						<label className={styles.inputLabel}>이름</label>
-						<input
-							type="text"
-							value={name}
-							onChange={(e) => setName(e.target.value)}
-							placeholder="이름을 입력해주세요"
-							className={styles.input}
-						/>
-					</>
-				) : (
-					<>
-						<label className={styles.inputLabel}>이메일</label>
-						<input
-							type="email"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							placeholder="이메일을 입력해주세요"
-							className={styles.input}
-						/>
-					</>
-				)}
-				<label className={styles.inputLabel}>연락처</label>
-				<input
-					type="tel"
-					value={contact}
-					onChange={handleContactChange}
-					placeholder="등록한 연락처를 입력해주세요"
-					className={styles.input}
-					maxLength={13}
-				/>
+			</nav>
 
-				{error && <div className={styles.errorMessage}>{error}</div>}
-				<button type="submit" className={styles.submitButton}>
-					{isPasswordReset ? '비밀번호 재설정' : '이메일 찾기'}
-				</button>
-			</form>
-			<div className={styles.footer}>
+			<main className={styles.formMain}>
+				<form onSubmit={handleSubmit} className={styles.form}>
+					{!isPasswordReset ? (
+						<>
+							<label className={styles.inputLabel}>이름</label>
+							<input
+								type="text"
+								value={name}
+								onChange={(e) => setName(e.target.value)}
+								placeholder="이름을 입력해주세요"
+								className={styles.input}
+							/>
+						</>
+					) : (
+						<>
+							<label className={styles.inputLabel}>이메일</label>
+							<input
+								type="email"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+								placeholder="이메일을 입력해주세요"
+								className={styles.input}
+							/>
+						</>
+					)}
+					<label className={styles.inputLabel}>연락처</label>
+					<input
+						type="tel"
+						value={contact}
+						onChange={handleContactChange}
+						placeholder="등록한 연락처를 입력해주세요"
+						className={styles.input}
+						maxLength={13}
+					/>
+
+					{error && <div className={styles.errorMessage}>{error}</div>}
+					<button type="submit" className={styles.submitButton}>
+						{isPasswordReset ? '비밀번호 재설정' : '이메일 찾기'}
+					</button>
+				</form>
+			</main>
+
+			<footer className={styles.footer}>
 				<Link to="/login">로그인</Link> <span>|</span>{' '}
 				<Link to="/signup">회원가입</Link>
-			</div>
+			</footer>
 		</div>
 	);
 };
