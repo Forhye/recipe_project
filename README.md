@@ -259,7 +259,7 @@ AI 기술을 웹 서비스에 접목시키는 과정은 도전적이면서도 �
 
 - hook
     <ol>
-        <li>usePageStyle.ts의 경우 돔을 바로 컨트롤하므로 훅으로 쓰기에 적합하지 않음</li>
+        <li><s>usePageStyle.ts의 경우 돔을 바로 컨트롤하므로 훅으로 쓰기에 적합하지 않음</s> ✔수정완료(사용 훅 부분을 지우고 module CSS로 코드 변경)</li>
         <li>useThumbnailimgUpload.ts 는 에어를 단순히 콘솔로만 로깅을 하고 있어서 유저가 확인하기 어려운 부분이 아쉬움</li>
     </ol>
 
