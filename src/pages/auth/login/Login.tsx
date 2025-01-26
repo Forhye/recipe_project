@@ -3,11 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
 import errorIcon from '/assets/icon_error.png';
 import { useAuth } from '../../../context/AuthContext';
-import { usePageStyle } from '../../../hooks/usePageStyle'; // 커스텀 훅 import
 
 const Login = () => {
-	usePageStyle(); // 커스텀 훅 사용
-
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [loginError, setLoginError] = useState('');
