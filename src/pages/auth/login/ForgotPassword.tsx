@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import {
 	getFirestore,
@@ -9,10 +9,23 @@ import {
 } from 'firebase/firestore';
 import styles from './ForgotPassword.module.css';
 import { Link } from 'react-router-dom';
-import { usePageStyle } from '../../../hooks/usePageStyle';
 
-const ForgotPassword: React.FC = () => {
-	usePageStyle();
+const ForgotPassword = () => {
+	useEffect(() => {
+		document.documentElement.style.cssText = `
+            height: 100%;
+            overflow: hidden;
+        `;
+
+		document.body.style.cssText = `
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #FFF9E9;
+            font-family: 'SUIT Variable', sans-serif;
+            overflow: hidden;
+        `;
+	});
 
 	const [name, setName] = useState('');
 	const [contact, setContact] = useState('');
