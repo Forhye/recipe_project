@@ -58,48 +58,69 @@ const Login = () => {
 
 			<div className={styles.loginContainer}>
 				<div className={styles.loginBox}>
-					<h1 className={styles.title}>
+					<header className={styles.title}>
 						<Link to="/">
 							<img src="/assets/icon_logo.png" alt="홈으로 가기" />
 						</Link>
-					</h1>
-					<form onSubmit={handleLogin}>
-						<input
-							type="email"
-							placeholder="이메일을 입력해주세요"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							className={`${styles.input} ${email ? styles.inputWithContent : ''}`}
-						/>
-						<input
-							type="password"
-							placeholder="비밀번호를 입력해주세요"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-							className={`${styles.input} ${password ? styles.inputWithContent : ''}`}
-						/>
+					</header>
+					<form onSubmit={handleLogin} aria-labelledby="login-heading">
+						<fieldset className={styles.fieldset}>
+							<legend id="login-heading" className={styles.srOnly}>
+								로그인 정보 입력
+							</legend>
+							<label htmlFor="email" className={styles.srOnly}>
+								이메일
+							</label>
+							<input
+								id="email"
+								type="email"
+								placeholder="이메일을 입력해주세요"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+								className={`${styles.input} ${email ? styles.inputWithContent : ''}`}
+							/>
+							<label htmlFor="password" className={styles.srOnly}>
+								비밀번호
+							</label>
+							<input
+								id="password"
+								type="password"
+								placeholder="비밀번호를 입력해주세요"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+								className={`${styles.input} ${password ? styles.inputWithContent : ''}`}
+							/>
+						</fieldset>
 						{loginError && (
-							<p className={styles.error}>
+							<p className={styles.error} role="alert">
 								<img src={errorIcon} alt="Error" className={styles.errorIcon} />
 								{loginError}
 							</p>
 						)}
-						<button
-							type="button"
-							onClick={handleGoogleLogin}
-							className={styles.googleButton}
-						>
-							<img src="/assets/icon_google.png" alt="Google" /> 구글로
-							로그인하기
-						</button>
+						<div className={styles.socialLogin}>
+							<button
+								type="button"
+								onClick={handleGoogleLogin}
+								className={styles.googleButton}
+							>
+								<img src="/assets/icon_google.png" alt="Google" /> 구글로
+								로그인하기
+							</button>
+						</div>
 						<button type="submit" className={styles.loginButton}>
 							로그인하기
 						</button>
 					</form>
-					<div className={styles.links}>
-						<Link to="/forgot-password">이메일 찾기</Link> <span>|</span>{' '}
-						<Link to="/forgot-password">비밀번호 찾기</Link>
-					</div>
+					<nav className={styles.links}>
+						<ul>
+							<li>
+								<Link to="/forgot-password">이메일 찾기</Link>
+							</li>
+							<li>
+								<Link to="/forgot-password">비밀번호 찾기</Link>
+							</li>
+						</ul>
+					</nav>
 					<footer className={styles.signup}>
 						아직 회원이 아니신가요? <Link to="/signup">회원가입</Link>
 					</footer>

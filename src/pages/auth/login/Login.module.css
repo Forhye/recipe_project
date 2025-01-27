@@ -109,6 +109,17 @@
 	margin-top: 60px;
 }
 
+.links ul {
+	display: flex;
+	justify-content: center;
+}
+
+.links ul li:first-child::after {
+	content: '|';
+	color: rgba(0, 0, 0, 0.3);
+	padding: 0 20px;
+}
+
 .links a {
 	color: rgba(0, 0, 0, 0.3);
 	text-decoration: none;
