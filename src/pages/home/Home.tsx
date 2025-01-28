@@ -44,7 +44,7 @@ const Home = () => {
 
 	const handleOptionClick = (path: string) => {
 		if (!user) {
-			alert('로그인 하셔야합니다.');
+			alert('로그인이 필요한 서비스입니다.');
 			navigate('/login'); // 로그인되지 않았다면 로그인 페이지로 리다이렉트
 		} else {
 			navigate(path); // 로그인된 경우 해당 경로로 이동
@@ -55,7 +55,7 @@ const Home = () => {
 		if (user) {
 			navigate('/create'); // 로그인된 경우 레시피 작성하기 페이지로 이동
 		} else {
-			alert('로그인 하셔야합니다.');
+			alert('로그인이 필요한 서비스입니다.');
 			navigate('/login'); // 로그인되지 않았다면 로그인 페이지로 리다이렉트
 		}
 	};
