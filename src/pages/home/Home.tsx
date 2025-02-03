@@ -11,12 +11,19 @@ import RecipeList from '../recipelist/RecipeList';
 
 const Home = () => {
 	const [isOpen, setIsOpen] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 	const plusRef = useRef<HTMLUListElement>(null);
 	const { user } = useAuth(); // user 정보를 가져옵니다.
 	const navigate = useNavigate();
 	const recipeListRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
+		const timer = setTimeout(() => {
+			if (isLoading) {
+				navigate('/404');
+			}
+		}, 5000);
+
 		const handleClickOutside = (event: MouseEvent) => {
 			if (plusRef.current && !plusRef.current.contains(event.target as Node)) {
 				setIsOpen(false);
@@ -31,10 +38,11 @@ const Home = () => {
 
 		document.addEventListener('mousedown', handleClickOutside);
 		return () => {
+			clearTimeout(timer);
 			document.removeEventListener('mousedown', handleClickOutside);
 			document.body.style.marginTop = '';
 		};
-	}, []);
+	}, [isLoading, navigate]);
 
 	const options = [
 		{ label: '레시피 작성하기', path: '/create' },
