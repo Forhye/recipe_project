@@ -53,15 +53,56 @@ export default function RecipeDetail() {
 				}
 			});
 
-			// 컴포넌트가 마운트될 때 조회수 증가
+			const cleanOldStorage = () => {
+				const now = new Date().getTime();
+				const expLimit = 30 * 24 * 60 * 60 * 1000;
+
+				Object.keys(localStorage).forEach((key) => {
+					if (key.startsWith('visited_')) {
+						const visitedData = localStorage.getItem(key);
+
+						if (visitedData) {
+							const { timestamp } = JSON.parse(visitedData);
+
+							// 오래된 데이터 삭제
+							if (now - timestamp > expLimit) {
+								localStorage.removeItem(key);
+								console.log(`로컬 스토리지 삭제됨: ${key}`);
+							}
+						}
+					}
+				});
+			};
+
 			const incrementViews = async () => {
+				const visitedKey = `visited_${recipeId}`;
+				const now = new Date().getTime();
+				const limitTime = 8 * 60 * 60 * 1000; //제한시간 8시간
+
+				const visitedData = localStorage.getItem(visitedKey);
+
+				if (visitedData) {
+					const { timestamp } = JSON.parse(visitedData);
+
+					if (now - timestamp < limitTime) {
+						return;
+					}
+				}
+
+				// 방문 기록이 없거나 제한 시간이 지난 경우 조회수 증가
 				const recipeRef = doc(db, 'recipes', recipeId);
 				await updateDoc(recipeRef, {
 					views: increment(1), // 조회수 1 증가
 				});
+
+				// 새로운 방문 기록 저장
+				localStorage.setItem(visitedKey, JSON.stringify({ timestamp: now }));
 			};
 
-			incrementViews(); // 조회수 업데이트 함수 호출
+			if (recipeId) {
+				cleanOldStorage();
+				incrementViews(); // 조회수 업데이트 함수 호출
+			}
 
 			return () => unsubscribe();
 		}
