@@ -17,7 +17,7 @@ const PageNotFound: React.FC = () => {
 					주소가 변경 혹은 삭제되어 요청하신 페이지를 찾을 수 없습니다.
 				</p>
 				<a href="/" className={styles.link}>
-					메인 화면으로 가기 <span className={styles.arrow}>→</span>
+					메인 화면으로 가기 <span className={styles.arrow}></span>
 				</a>
 			</div>
 		</div>
